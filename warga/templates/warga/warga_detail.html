@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Warga Detail Kelurahan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background-color: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info p {
+            font-size: 16px;
+            margin: 0;
+            padding: 10px;
+            background-color: #f9fbfc;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .info strong {
+            color: #34495e;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #ecf0f1;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        li strong {
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #bdc3c7;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #2c3e50;
+        }
+
+        li em {
+            display: block;
+            margin-top: 8px;
+            color: #7f8c8d;
+        }
+
+        li small {
+            display: block;
+            margin-top: 10px;
+            color: #95a5a6;
+        }
+
+        .empty {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        a.button {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        a.button:hover {
+            background-color: #2980b9;
+        }
+
+        hr {
+            margin: 40px 0 30px;
+            border: none;
+            border-top: 1px solid #dcdcdc;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons a {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .edit-btn {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #e67e22;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Daftar Warga Detail</h1>
+    <ul>
+      <li>Nama: {{ object.nama_lengkap }}</li>
+      <li>NIK: {{ object.nik }}</li>
+      <li>Alamat: {{ object.alamat }}</li>
+      <li>No Telp: {{ object.no_telepon }}</li>
+    </ul>
+    <hr />
+    <h2>Daftar Pengaduan oleh {{ object.nama_lengkap }}</h2>
+
+    <ul>
+      {% for aduan in object.pengaduan.all %}
+      <li>
+        <strong>{{ aduan.judul }}</strong> (Status: {{ aduan.get_status_display }})
+        <p>{{ aduan.deskripsi }}</p>
+      </li>
+      {% empty %}
+      <li>Warga ini belum pernah membuat pengaduan.</li>
+      {% endfor %}
+    </ul>
+  </body>
+  </body>
+</html>

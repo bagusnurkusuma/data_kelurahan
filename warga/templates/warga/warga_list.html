@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Daftar Warga Kelurahan</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #eef2f5;
+        margin: 0;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-size: 2em;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        text-decoration: none;
+        background-color: #3498db;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #2980b9;
+      }
+
+      .card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #f9fbfc;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .card a {
+        text-decoration: none;
+        color: #2980b9;
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+
+      .nik {
+        font-size: 0.95em;
+        color: #555;
+      }
+
+      .empty {
+        text-align: center;
+        color: #7f8c8d;
+        font-style: italic;
+        margin-top: 20px;
+      }
+
+      .icon {
+        margin-right: 10px;
+        font-size: 1.3em;
+        color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Daftar Warga</h1>
+
+    <div class="actions">
+      <a href="{% url 'pengaduan-list' %}" class="btn"
+        >📨 Lihat Pengaduan Warga</a
+      >
+    </div>
+    <ul>
+      {% for warga in object_list %}
+      <li>
+        <a href="{% url 'warga-detail' warga.pk %}">{{ warga.nama_lengkap }}</a>
+        - NIK: {{ warga.nik }}
+      </li>
+      {% empty %}
+      <li>Belum ada data warga yang terdaftar.</li>
+      {% endfor %}
+    </ul>
+
+    
+</html>
