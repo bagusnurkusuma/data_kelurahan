@@ -99,6 +99,8 @@
         <em>👤 Oleh: {{ aduan.pelapor.nama_lengkap }}</em>
         📝 {{ aduan.deskripsi|truncatewords:15 }}
         <small>📅 {{ aduan.tanggal_lapor }}</small>
+        <a href="{% url 'pengaduan-edit' aduan.pk %}">✏️ Edit Data</a> |
+        <a href="{% url 'pengaduan-hapus' aduan.pk %}">🗑️ Hapus Data</a>
       </li>
       {% empty %}
       <li style="text-align: center; font-style: italic; color: #7f8c8d">

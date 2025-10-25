@@ -91,17 +91,19 @@
   </head>
   <body>
     <h1>Daftar Warga</h1>
-
+    
     <div class="actions">
-      <a href="{% url 'pengaduan-list' %}" class="btn"
-        >📨 Lihat Pengaduan Warga</a
-      >
+      <a href="{% url 'warga-tambah' %}" class="btn">Tambah Warga Baru</a>
+      <a href="{% url 'pengaduan-tambah' %}" class="btn">Tambah Pengaduan Baru</a>
+      <a href="{% url 'pengaduan-list' %}" class="btn">📨 Lihat Pengaduan Warga</a>
     </div>
     <ul>
       {% for warga in object_list %}
       <li>
         <a href="{% url 'warga-detail' warga.pk %}">{{ warga.nama_lengkap }}</a>
         - NIK: {{ warga.nik }}
+        <a href="{% url 'warga-edit' warga.pk %}">✏️ Edit Data</a> | 
+        <a href="{% url 'warga-hapus' warga.pk %}">🗑️ Hapus Data</a>
       </li>
       {% empty %}
       <li>Belum ada data warga yang terdaftar.</li>
