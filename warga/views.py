@@ -3,7 +3,9 @@ from django.views.generic import ListView,DetailView, CreateView, UpdateView,Del
 from .models import Warga, Pengaduan
 from .forms import WargaForm,PengaduanForm
 from rest_framework.generics import ListAPIView, RetrieveAPIView 
-from .serializers import WargaSerializer
+from .serializers import WargaSerializer, PengaduanSerializer
+from rest_framework import viewsets # Impor viewsets
+
 
 class WargaListView(ListView):
     model = Warga
@@ -54,10 +56,10 @@ class PengaduanDeleteView(DeleteView):
     template_name = 'warga/pengaduan_confirm_delete.html'
     success_url = reverse_lazy('pengaduan-list')
 
-class WargaListAPIView(ListAPIView):
-    queryset = Warga.objects.all()
+class WargaViewSet(viewsets.ModelViewSet):
+    queryset = Warga.objects.all().order_by('id')
     serializer_class = WargaSerializer
 
-class WargaDetailAPIView(RetrieveAPIView):
-    queryset = Warga.objects.all()
-    serializer_class = WargaSerializer
+class PengaduanViewSet(viewsets.ModelViewSet):
+    queryset = Pengaduan.objects.all().order_by('id')
+    serializer_class = PengaduanSerializer
