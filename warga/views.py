@@ -5,7 +5,8 @@ from .forms import WargaForm,PengaduanForm
 from rest_framework.generics import ListAPIView, RetrieveAPIView 
 from .serializers import WargaSerializer, PengaduanSerializer
 from rest_framework import viewsets # Impor viewsets
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 class WargaListView(ListView):
     model = Warga
@@ -63,3 +64,25 @@ class WargaViewSet(viewsets.ModelViewSet):
 class PengaduanViewSet(viewsets.ModelViewSet):
     queryset = Pengaduan.objects.all().order_by('id')
     serializer_class = PengaduanSerializer
+
+class WargaViewSet(viewsets.ModelViewSet):
+    queryset = Warga.objects.all().order_by('-tanggal_registrasi')
+    serializer_class = WargaSerializer
+    # permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['nama_lengkap', 'nik', 'alamat']
+    ordering_fields = ['nama_lengkap', 'tanggal_registrasi']
+
+    # Override get_permissions agar POST bisa tanpa login
+    def get_permissions(self):
+        if self.action == 'create':  # jika method POST
+            return [AllowAny()]  # izinkan semua user
+        return [IsAuthenticatedOrReadOnly()]  # metode lain tetap pakai permission default
+
+class PengaduanViewSet(viewsets.ModelViewSet):
+    queryset = Pengaduan.objects.all().order_by('judul')
+    serializer_class = PengaduanSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['judul', 'deskripsi']
+    ordering_fields = ['status', 'tanggal_lapor']

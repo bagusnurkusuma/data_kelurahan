@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Warga</title>
+</head>
+
+<body>
+    <h1>Data Warga</h1>
+
+    <!-- FORM TAMBAH WARGA -->
+    <h2>Tambah Warga Baru</h2>
+    <form id="formWarga">
+        <input type="text" id="nik" placeholder="NIK" required><br><br>
+        <input type="text" id="nama_lengkap" placeholder="Nama Lengkap" required><br><br>
+        <input type="text" id="alamat" placeholder="Alamat" required><br><br>
+        <input type="text" id="no_telepon" placeholder="No Telepon" required><br><br>
+
+        <button type="submit">Kirim</button>
+    </form>
+
+    <hr>
+
+    <!-- DATA WARGA -->
+    <div id="warga-list-container">Memuat data...</div>
+
+    <!-- PANGGIL FILE JS EKSTERNAL -->
+    <script src="app.js"></script>
+</body>
+</html>
